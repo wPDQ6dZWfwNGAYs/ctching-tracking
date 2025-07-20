@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>การเช็คสถานะการจัดส่งพัสดุ</title>
+  <link rel="manifest" href="manifest.json">
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('sw.js');
+      });
+    }
+  </script>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 0; background-color: #fff; color: #333; }
+    header, footer { background-color: #d62828; color: white; padding: 1rem; text-align: center; }
+    main { padding: 1rem; }
+    .input-group { margin-bottom: 1rem; }
+    input[type="text"] { padding: 0.5rem; width: 90%; border-radius: 4px; border: 1px solid #ccc; }
+    button { padding: 0.6rem 1rem; background-color: #d62828; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    .card { background: #f4f4f4; padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📦 การเช็คสถานะการจัดส่งพัสดุ</h1>
+  </header>
+
+  <main>
+    <div class="input-group">
+      <input type="text" id="billInput" placeholder="กรอกหัวบิลหรือสแกน QR" />
+      <button onclick="searchBill()">ค้นหา</button>
+    </div>
+    <div id="result"></div>
+  </main>
+
+  <footer>
+    <p>© 2025 CT Ching Transport</p>
+  </footer>
+
+  <script>
+    function searchBill() {
+      const bill = document.getElementById('billInput').value.trim();
+      const result = document.getElementById('result');
+      if (!bill) return result.innerHTML = '<div class="card">กรุณากรอกหัวบิล</div>';
+      result.innerHTML = '<div class="card">หัวบิล: ' + bill + ' - สินค้ากำลังดำเนินการจัดส่ง</div>';
+    }
+  </script>
+</body>
+</html>
